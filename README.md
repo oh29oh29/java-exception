@@ -72,6 +72,70 @@ public class Main {
 
 컴파일러는 `java.lang.ArithmeticException` 이 unchecked 예외이기 때문에 컴파일을 허용한다.
 
+## Handle an exception
+
+Java 예외 처리는 try, catch, finally, throw, throws 다섯 가지 키워드를 통해 관리된다.  
+
+#### try-catch-finally
+
+```java
+try {
+    // block of code to monitor for errors
+    // the code you think can raise an exception
+}
+catch (ExceptionType1 exOb) {
+    // exception handler for ExceptionType1
+}
+catch (ExceptionType2 exOb) {
+    // exception handler for ExceptionType2
+}
+finally {   // optional
+    // block of code to be executed after try block ends
+}
+```
+
+#### throw
+
+throw 키워드는 메서드 또는 코드 블럭에서 명시적으로 예외를 throw 하는데 사용된다.  
+
+```java
+throw <exception_instance>
+
+// example
+throw new ArithmeticException("/by zero");
+```
+
+이때 exception instance 는 Throwable 타입이거나 Throwable 의 하위 클래스여야만 한다.  
+
+어플리케이션 실행 과정 중 throw 문이 실행되면 즉시 해당 블럭은 중지되고 메서드 call stack 에 따라 try 문과 예외에 일치하는 catch 문이 있는지 확인한다.  
+일치하는 try-catch 문이 있다면 그에 맞는 처리를 진행하고, 없다면 기본 예외 처리기가 어플리케이션을 중지한다.  
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        try {
+            throwNullPointerException();
+        } catch (NullPointerException e) {
+            System.out.println("NullPointerException catch");
+        }
+    }
+
+    private static void throwNullPointerException() {
+        throw new NullPointerException();
+    }
+}
+```
+
+#### throws
+
+throws 는 해당 메서드가 명시된 예외를 throw 할 수 있음을 나타내기 위해 사용되는 키워드이다.  
+
+```java
+public example() throws <exception_list>
+```
+
+
+
 <hr>
 
 #### References
